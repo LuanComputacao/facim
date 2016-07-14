@@ -13,7 +13,7 @@ class Pessoa
     private $sobrenome = null;
     private $endereco = null;
 
-    public function create($nome, $sobrenome)
+    public function create($nome, $sobrenomeW)
     {
 
     }
