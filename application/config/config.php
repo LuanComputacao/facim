@@ -7,10 +7,13 @@
  */
 
 
-define('db_host', '127.0.0.1');
-define('db_sgbd', 'mysql');
-define('db_user', 'homestead');
-define('db_pass', 'secret');
-define('db_name', 'crossknowledge');
+//Data Base constants
+$config['db_sgbd']  = 'mysql';
+$config['db_name']  = 'crossknowledge';
+$config['db_host']  = '127.0.0.1';
+$config['db_dsn']   = db_sgbd . ':dbname=' . db_name . ';host=' . db_host;
+$config['db_user']  = 'homestead';
+$config['db_pass']  = 'secret';
 
-define('db_dsn', db_sgbd . ':dbname=' . db_name . ';host=' . db_host);
+
+$config['default_controller'] = 'main';
