@@ -8,10 +8,11 @@
 
 
 //Data Base constants
+$config = [];
 $config['db_sgbd']  = 'mysql';
 $config['db_name']  = 'crossknowledge';
 $config['db_host']  = '127.0.0.1';
-$config['db_dsn']   = db_sgbd . ':dbname=' . db_name . ';host=' . db_host;
+$config['db_dsn']   = $config['db_sgbd'] . ':dbname=' . $config['db_name'] . ';ho$st=' . $config['db_host'];
 $config['db_user']  = 'homestead';
 $config['db_pass']  = 'secret';
 

@@ -9,5 +9,5 @@
 require('../system/config.php');
 
 
-var_dump(ROOT_DIR);
+
 
