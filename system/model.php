@@ -9,11 +9,34 @@
 class Model
 {
 
+    private $connection;
+
     /**
      * Model constructor.
      */
     public function __construct()
     {
-        $dbh = new PDO($database['dataSourceName'], $database['user'], $database['password']);
+        global $config;
+        $this->connection = new PDO($config['db_dsn'], $config['db_user'], $config['db_pass']) or die('MySQL connection problem');
+    }
+
+    public function create()
+    {
+
+    }
+
+    public function read()
+    {
+
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function delete()
+    {
+
     }
 }
