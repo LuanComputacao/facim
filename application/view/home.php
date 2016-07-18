@@ -1,5 +1,7 @@
 <?php include('head.php'); ?>
 
-<div></div>
+    <div>
+        <pre><?php var_dump($pessoa) ?></pre>
+    </div>
 
 <?php include('footer.php'); ?>
