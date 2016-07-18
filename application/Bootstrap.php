@@ -14,7 +14,7 @@ $url = ($request_url != $script_url) ? trim(preg_replace('/' . str_replace('/', 
 
 $segments = explode('/', $url);
 
-$controller = (isset($segments[0]) && $segments[0] != '') ? $segments[0]: $config['default_controller'];
+$controller = (isset($segments[0]) && $segments[0] != '') ? $segments[0] : $config['default_controller'];
 $action = (isset($segments[1]) && $segments[1] != '') ? $segments[1] : $config['default_action'];
 
 $controllerFile = APP_DIR . '/controller/' . $controller . '.php';

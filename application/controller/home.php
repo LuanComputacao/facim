@@ -14,6 +14,7 @@ class Home extends Controller
     function index ()
     {
         $template = $this->loadView('home');
+        $template->set('title', $this->config['title']);
         $template->show();
     }
 

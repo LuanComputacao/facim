@@ -1,5 +1,5 @@
 <?php include('head.php'); ?>
 
-<div><?php $config['title']; ?></div>
+<div></div>
 
 <?php include('footer.php'); ?>
