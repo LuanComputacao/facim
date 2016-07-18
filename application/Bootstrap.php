@@ -10,5 +10,24 @@
 $request_url = (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : '';
 $script_url = (isset($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : '';
 
-var_dump(trim(preg_replace('/' . str_replace('/', '\/', str_replace('index.php', '', $script_url)) . '/', '', $request_url, 1), '/'));
-var_dump($script_url);
+$url = ($request_url != $script_url) ? trim(preg_replace('/' . str_replace('/', '\/', str_replace('index.php', '', $script_url)) . '/', '', $request_url, 1), '/') : '';
+
+$segments = explode('/', $url);
+
+$controller = (isset($segments[0]) && $segments[0] != '') ? $segments[0]: $config['default_controller'];
+$action = (isset($segments[1]) && $segments[1] != '') ? $segments[1] : $config['default_action'];
+
+$controllerFile = APP_DIR . '/controller/' . $controller . '.php';
+
+if (file_exists($controllerFile)) {
+    require_once($controllerFile);
+} else {
+    $controller = $config['default_error'];
+    require_once(APP_DIR . '/controller/' . $config['default_error'] . '.php');
+}
+//var_dump($controllerFile);
+//var_dump($controller);
+//var_dump($action);
+
+$oController = new $controller;
+call_user_func_array(array($oController, $action), array_slice($segments, 2));

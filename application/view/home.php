@@ -1,1 +1,5 @@
-<h1>Olá mundo</h1>
+<?php include('head.php'); ?>
+
+<div><?php $config['title']; ?></div>
+
+<?php include('footer.php'); ?>
