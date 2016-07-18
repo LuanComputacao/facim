@@ -13,9 +13,21 @@ class Pessoa extends Model
     private $sobrenome = null;
     private $endereco = null;
 
-    public function create($nome, $sobrenome)
+
+    /**
+     * Obtem pessoas com endereço
+     * @param $nome
+     * @param null $sobrenome
+     * @return array
+     */
+    public function getPessoa($nome, $sobrenome = null)
     {
+        $sqlStm = 'SELECT * FROM pessoas p INNER JOIN enderecos e WHERE p.fk_enderecos = e.id AND nome LIKE \'%:nome%\'';
+        $sqlStm .= (!is_null($sobrenome)) ? 'AND sobrenome LIKE \'%:sobrenome\'' : '';
+        var_dump($sqlStm);
+        $prepSt = $this->connection->prepare($sqlStm);
+        $prepSt->bindValue(':nome', $nome);
 
+        return $prepSt->fetchAll();
     }
-
 }

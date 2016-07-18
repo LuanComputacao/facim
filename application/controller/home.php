@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: luan
@@ -11,9 +12,14 @@ class Home extends Controller
     /**
      * Home constructor.
      */
-    function index ()
+    function index()
     {
         $template = $this->loadView('home');
+
+        $pessoa = $this->loadModel('Pessoa');
+        $pessoa->getPessoa('lu');
+
+        $template->set('pessoa', $pessoa->getPessoa());
         $template->set('title', $this->config['title']);
         $template->show();
     }

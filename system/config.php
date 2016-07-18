@@ -9,7 +9,7 @@
 
 define('ROOT_DIR', realpath((dirname(__DIR__))));
 define('APP_DIR', ROOT_DIR . '/application');
-define('MODEL_DIR', ROOT_DIR . '/model/');
+define('MODEL_DIR', ROOT_DIR . '/application/model/');
 define('VIEW_DIR', ROOT_DIR . '/application/view/');
 define('CONTROLLER_DIR', ROOT_DIR . '/controller/');
 

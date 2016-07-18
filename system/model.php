@@ -9,7 +9,7 @@
 class Model
 {
 
-    private $connection;
+    protected $connection;
 
     /**
      * Model constructor.
@@ -22,17 +22,14 @@ class Model
 
     public function create()
     {
-
     }
 
-    public function read()
+    public function read($sqlSt)
     {
-
     }
 
     public function update()
     {
-
     }
 
     public function delete()
