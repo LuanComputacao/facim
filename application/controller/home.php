@@ -17,9 +17,8 @@ class Home extends Controller
         $template = $this->loadView('home');
 
         $pessoa = $this->loadModel('Pessoa');
-        $pessoa->getPessoa('lu');
 
-        $template->set('pessoa', $pessoa->getPessoa());
+        $template->set('pessoas', $pessoa->getPessoas());
         $template->set('title', $this->config['title']);
         $template->show();
     }
