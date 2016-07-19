@@ -1,1 +1,3 @@
-# mvc
+# FACIM
+
+Simplest php skeleton
