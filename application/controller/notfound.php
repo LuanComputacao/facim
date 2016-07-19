@@ -14,6 +14,7 @@ class NotFound extends Controller
 
     private function error404()
     {
-        echo 'Página não encontrada';
+        $template = $this->loadView('notfound');
+        $template->show();
     }
 }
