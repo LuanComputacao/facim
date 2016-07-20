@@ -28,10 +28,5 @@ if (file_exists($controllerFile)) {
     require_once(APP_DIR . '/controller/' . $config['default_error'] . '.php');
 }
 
-//var_dump($controllerFile);
-//var_dump($controller);
-//var_dump($action);
-//var_dump(array_slice($segments,2,10));
-
 $oController = new $controller;
-call_user_func_array(array($oController, $action), array_slice($segments, 2));
+call_user_func_array(array($oController, $action), array(array_slice($segments, 2)));
