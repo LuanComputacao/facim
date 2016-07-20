@@ -35,4 +35,9 @@ class Controller
     {
         return new View($view);
     }
+
+    protected function getPost()
+    {
+        return $_POST;
+    }
 }

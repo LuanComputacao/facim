@@ -19,15 +19,19 @@ $action = (isset($segments[1]) && $segments[1] != '') ? $segments[1] : $config['
 
 $controllerFile = APP_DIR . '/controller/' . $controller . '.php';
 
+//Verify controller file
 if (file_exists($controllerFile)) {
     require_once($controllerFile);
 } else {
     $controller = $config['default_error'];
+    $action = $config['default_action'];
     require_once(APP_DIR . '/controller/' . $config['default_error'] . '.php');
 }
+
 //var_dump($controllerFile);
 //var_dump($controller);
 //var_dump($action);
+//var_dump(array_slice($segments,2,10));
 
 $oController = new $controller;
 call_user_func_array(array($oController, $action), array_slice($segments, 2));
