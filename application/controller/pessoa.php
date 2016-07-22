@@ -10,11 +10,11 @@ class Pessoa extends Controller
 {
     function index()
     {
-        echo 'crud';
+        echo json_encode($this->getPost());
     }
 
-    function create()
+    function create($args)
     {
-        $post = $this->getPost();
+
     }
 }
