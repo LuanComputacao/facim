@@ -15,7 +15,6 @@ class Controller
      */
     public function __construct()
     {
-
         global $config;
         $this->config = $config;
     }
@@ -38,7 +37,7 @@ class Controller
 
     protected function getPost()
     {
-        $post=array();
+        $post = array();
         foreach ($_POST as $key => $value) {
             $post[$key] = $value;
         }
