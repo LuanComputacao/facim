@@ -38,6 +38,10 @@ class Controller
 
     protected function getPost()
     {
-        return $_POST;
+        $post=array();
+        foreach ($_POST as $key => $value) {
+            $post[$key] = $value;
+        }
+        return $post;
     }
 }
