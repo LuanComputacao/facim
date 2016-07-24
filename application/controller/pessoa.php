@@ -10,7 +10,9 @@ class Pessoa extends Controller
 {
     function index()
     {
-        echo json_encode($this->getPost());
+
+        $pessoas = $this->loadModel('Pessoas');
+        echo json_encode($pessoas->getPessoas());
     }
 
     function create($args)
