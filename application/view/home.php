@@ -25,24 +25,4 @@
 
     <div class="row">Segunda Tabela</div>
 
-    <div class="row">
-        <table class="col-1-100 table-bordered">
-            <thead>
-            <?php foreach ($pessoas[0] as $index => $pessoa) : ?>
-                <td class="t-center"><?php echo $index; ?></td>
-            <?php endforeach; ?>
-            </thead>
-            <tr>
-                <?php foreach ($pessoas as $index => $pessoa) : ?>
-                    <?php foreach ($pessoa as $prop => $value) : ?>
-                        <td><?php echo $value ?></td>
-
-                    <?php endforeach; ?>
-                    </td>
-                <?php endforeach; ?>
-            </tr>
-        </table>
-    </div>
-
-
 <?php include('footer.php'); ?>
