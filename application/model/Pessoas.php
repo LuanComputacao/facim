@@ -15,6 +15,38 @@ class Pessoas extends Model
 
 
     /**
+     * @param null $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param null $nome
+     */
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+    }
+
+    /**
+     * @param null $sobrenome
+     */
+    public function setSobrenome($sobrenome)
+    {
+        $this->sobrenome = $sobrenome;
+    }
+
+    /**
+     * @param null $endereco
+     */
+    public function setEndereco($endereco)
+    {
+        $this->endereco = $endereco;
+    }
+
+    /**
      * Obtem pessoas com endereço
      *
      * @param $nome
@@ -23,7 +55,7 @@ class Pessoas extends Model
      */
     public function getPessoas($nome = null, $sobrenome = null)
     {
-        $sqlStm = 'SELECT p.id, p.nome, p.sobrenome, e.rua, e.numero, e.bairro, e.cidade, e.uf FROM pessoas p INNER JOIN enderecos e WHERE p.fk_enderecos = e.id ';
+        $sqlStm = 'SELECT  p.nome, p.sobrenome, e.rua, e.numero, e.bairro, e.cidade, e.uf FROM pessoas p LEFT JOIN enderecos e ON p.fk_enderecos = e.id ';
         $sqlStm .= (!is_null($nome)) ? ' AND nome LIKE :nome' : '';
         $sqlStm .= (!is_null($sobrenome)) ? ' AND sobrenome LIKE :sobrenome' : '';
         $prepSt = $this->connection->prepare($sqlStm);
@@ -34,5 +66,28 @@ class Pessoas extends Model
         $prepSt->execute();
 
         return $prepSt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * @return null
+     */
+    public function dumpPessoa()
+    {
+        var_dump($this);
+    }
+
+
+    public function save()
+    {
+        $sqlStm = "INSERT INTO crossknowledge.pessoas (nome, sobrenome)
+                    VALUES (':nome', ':sobrenome')";
+        $prepStm = $this->connection->prepare($sqlStm);
+
+        $prepStm->bindValue(':nome', "$this->nome");
+        $prepStm->bindValue(':sobrenome', "$this->sobrenome");
+
+        $prepStm->execute();
+        return $prepStm->execute();
+
     }
 }

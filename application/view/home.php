@@ -1,28 +1,31 @@
 <?php include('head.php'); ?>
-
-
     <div class="row">
-        <h1><?php echo $title ?></h1>
-    </div>
-    <div class="row">
-        <table class="col-1-100 t-center">
-            <thead>
-            <?php foreach ($pessoas[0] as $index => $pessoa) : ?>
-                <td><?php echo $index; ?></td>
-            <?php endforeach; ?>
-            </thead>
-            <tr>
-                <?php foreach ($pessoas as $index => $pessoa) : ?>
-                    <?php foreach ($pessoa as $prop => $value) : ?>
-                        <td><?php echo $value ?></td>
-
-                    <?php endforeach; ?>
-                    </td>
-                <?php endforeach; ?>
-            </tr>
-        </table>
+        <div class="col-1-100">
+            <h1 class="t-center"><?php echo $title ?></h1>
+        </div>
     </div>
 
-    <div class="row">Segunda Tabela</div>
+    <div class="row">
+        <div class="col-1-100">
+            <?php include('formularios/pessoa.php');?>
+        </div>
+    </div>
+
+    <div class="container-table-pessoas" >
+        <div class="row">
+            <div class="col-1-100 t-center">
+                <h1>Pessoas</h1>
+            </div>
+        </div>
+        <div class="row">
+            <table  id="table-pessoas" class=" col-1-100 t-center">
+                <thead>
+                <td>Nome</td>
+                <td>Sobrenome</td>
+                <td>Endereço</td>
+                </thead>
+            </table>
+        </div>
+    </div>
 
 <?php include('footer.php'); ?>
