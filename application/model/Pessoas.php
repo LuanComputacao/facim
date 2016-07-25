@@ -68,25 +68,15 @@ class Pessoas extends Model
         return $prepSt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * @return null
-     */
-    public function dumpPessoa()
-    {
-        var_dump($this);
-    }
-
-
     public function save()
     {
         $sqlStm = "INSERT INTO crossknowledge.pessoas (nome, sobrenome)
-                    VALUES (':nome', ':sobrenome')";
+                    VALUES (:nome, :sobrenome)";
         $prepStm = $this->connection->prepare($sqlStm);
 
         $prepStm->bindValue(':nome', "$this->nome");
         $prepStm->bindValue(':sobrenome', "$this->sobrenome");
 
-        $prepStm->execute();
         return $prepStm->execute();
 
     }
