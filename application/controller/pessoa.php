@@ -38,8 +38,6 @@ class Pessoa extends Controller
         if (isset($pessoa['cidade'])    && $pessoa['cidade'] != '')    $pessoas->setId($pessoa['cidade']);
 
         $pessoas->save();
-        echo json_encode($pessoa);
-//        header('Location: /');
-//        exit;
+        echo '1';
     }
 }

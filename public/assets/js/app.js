@@ -3,7 +3,7 @@
  */
 
 var table = document.getElementById('table-pessoas');
-formPessoa  = document.forms['form-pessoa'];
+formPessoa = document.forms['form-pessoa'];
 
 populateTable = function (response) {
     content = JSON.parse(response);
@@ -24,53 +24,70 @@ populateTable = function (response) {
             tableRow.innerHTML = td;
             table.appendChild(tableRow);
         });
-
-
-
     } else {
         table.innerHTML = '<td colspan="3"> Não há pessoas cadastradas</td>'
     }
+};
+
+clearTable = function () {
+    head = table.getElementsByTagName('thead')[0].cloneNode(true);
+    table.innerHTML = '';
+    table.appendChild(head);
 };
 
 ajax("POST", "pessoa", populateTable);
 
 document.getElementById('form-pessoa').onsubmit = function () {
 
-    nome        = formPessoa['nome'].value;
-    sobrenome   = formPessoa['sobrenome'].value;
-    rua         = formPessoa['rua'].value;
-    numero      = formPessoa['numero'].value;
-    bairro      = formPessoa['bairro'].value;
-    cidade      = formPessoa['cidade'].value;
-    uf          = formPessoa['uf'].value;
+    erro = false;
+    nome = formPessoa['nome'].value;
+    sobrenome = formPessoa['sobrenome'].value;
+    rua = formPessoa['rua'].value;
+    numero = formPessoa['numero'].value;
+    bairro = formPessoa['bairro'].value;
+    cidade = formPessoa['cidade'].value;
+    uf = formPessoa['uf'].value;
 
-    if(nome  == null || nome == '') { formErro('nome'); return false; }
-    if(sobrenome  == null || sobrenome == '') { formErro('nome'); return false; }
-    if (!isNaN(numero)) {formErro('', 'O campo deve conter apenas números')}
+    if (nome == null || nome == '') {
+        formErro('nome');
+        return false;
+    }
+    if (sobrenome == null || sobrenome == '') {
+        formErro('sobrenome');
+        return false;
+    }
+    if (isNaN(numero) && numero != '') {
+        formErro('numero', 'O campo deve conter apenas números');
+        return false;
+    }
 
-    ajax('POST', 'pessoa/create', function (response) {
-        console.log(response);
-    },
-        'nome='+nome+'&'+
-        'sobrenome='+sobrenome+'&'+
-        'rua='+rua+'&'+
-        'numero='+numero+'&'+
-        'bairro='+bairro+'&'+
-        'cidade='+cidade+'&'+
-        'uf='+uf
-    );
-    formPessoa.reset();
+    if(!erro) {
+        ajax('POST', 'pessoa/create',
+            function (response) {
+                clearTable();
+                ajax("POST", "pessoa", populateTable);
+                formPessoa.reset();
+            },
+            'nome=' + nome + '&' +
+            'sobrenome=' + sobrenome + '&' +
+            'rua=' + rua + '&' +
+            'numero=' + numero + '&' +
+            'bairro=' + bairro + '&' +
+            'cidade=' + cidade + '&' +
+            'uf=' + uf
+        );
+    }
 
     return false;
 };
 
-formErro = function (campo, msg) {
+function formErro (campo, msg) {
     var msg = msg || null;
     eCampo = document.querySelector("input[name="+campo+"]");
     if (msg != null) {
         title = document.createAttribute('title');
         title.value = msg;
-        eCampo.setAttribute(title) ;
+        eCampo.setAttributeNode(title) ;
     }
     console.log(eCampo);
 };
