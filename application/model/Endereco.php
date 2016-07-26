@@ -1,11 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: luan
- * Date: 14/07/16
- * Time: 01:03
- */
+
 class Endereco extends Model
 {
     private $id = null;
@@ -14,6 +9,14 @@ class Endereco extends Model
     private $bairro = null;
     private $cidade = null;
     private $uf = null;
+
+    /**
+     * @param null $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * @param null $rua
@@ -63,11 +66,10 @@ class Endereco extends Model
         return $this->id;
     }
 
-
-
     public function getEndereco()
     {
         return array(
+            'id' => $this->id,
             'rua' => $this->rua,
             'numero' => $this->numero,
             'bairro' => $this->bairro,
@@ -96,5 +98,32 @@ class Endereco extends Model
         }
 
 
+    }
+
+    public function update ()
+    {
+        $sqlStm = "UPDATE enderecos SET rua = :rua, numero = :numero, bairro = :bairro, cidade = :cidade, uf = :uf WHERE id = :id";
+
+        $prepStm = $this->connection->prepare($sqlStm);
+
+        $prepStm->bindValue(':id'     , $this->id);
+        $prepStm->bindValue(':rua'    , ((!is_null($this->rua))?    $this->rua     :NULL));
+        $prepStm->bindValue(':numero' , ((!is_null($this->numero))? $this->numero  :NULL));
+        $prepStm->bindValue(':bairro' , ((!is_null($this->bairro))? $this->bairro  :NULL));
+        $prepStm->bindValue(':cidade' , ((!is_null($this->cidade))? $this->cidade  :NULL));
+        $prepStm->bindValue(':uf'     , ((!is_null($this->uf))?     $this->uf      :NULL));
+
+        if(!(is_null($this->rua) && is_null($this->numero) && is_null($this->bairro) && is_null($this->cidade) && is_null($this->uf))) {
+            $prepStm->execute();
+            $this->id = $this->connection->lastInsertId();
+        }
+    }
+
+    public function delete()
+    {
+        $sqlStm = "DELETE FROM enderecos WHERE id = :id";
+        $prepStm = $this->connection->prepare($sqlStm);
+        $prepStm->bindValue(':id', "$this->id");
+        return $prepStm->execute();
     }
 }

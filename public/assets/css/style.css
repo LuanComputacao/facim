@@ -19,3 +19,34 @@
 .fa-eraser, .fa-pencil {
     cursor: pointer;
 }
+.fa{
+    padding: 4px 5px;
+}
+
+
+
+/*button*/
+.sbm-button {
+    padding: 5px;
+    background-color: green;
+    display: inline-block;
+    border: 1px solid darkgreen;
+    border-radius: 3px;
+    margin: 7px 8px 4px 7px;
+}
+
+.sbm-button:hover {
+    background-color: lightgreen;
+    cursor: pointer;
+}
+.sbm-button:active{
+    background-color: darkgreen;
+}
+
+.sbm-button i{
+    padding: 0 5px 0 0px;
+}
+
+.head {
+    background: #ebfdfd;
+}

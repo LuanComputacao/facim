@@ -1,17 +1,12 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: luan
- * Date: 14/07/16
- * Time: 01:00
- */
+
 class Pessoas extends Model
 {
     private $id = null;
     private $nome = null;
     private $sobrenome = null;
-    private $endereco = null;
+    private $idEndereco = null;
 
 
     /**
@@ -39,11 +34,41 @@ class Pessoas extends Model
     }
 
     /**
-     * @param null $endereco
+     * @param null $idEndereco
      */
-    public function setEndereco($endereco)
+    public function setIdEndereco($idEndereco)
     {
-        $this->endereco = $endereco;
+        $this->idEndereco = $idEndereco;
+    }
+
+    /**
+     * @return null
+     */
+    public function getIdEndereco()
+    {
+        if (is_null($this->idEndereco)) {
+            if (!is_null($this->id)) {
+                $prepStm = $this->connection->query("SELECT fk_enderecos FROM pessoas WHERE id = $this->id");
+                $id = $prepStm->fetch(PDO::FETCH_ASSOC);
+                if (!is_null($id['fk_enderecos'])) {
+                    $this->idEndereco = $id['fk_enderecos'];
+                } else {
+                    $this->idEndereco = null;
+                }
+            }
+        }
+        return $this->idEndereco;
+
+    }
+
+    public function getPessoa()
+    {
+        return array(
+            'id'        => $this->id,
+            'nome'      => $this->nome,
+            'sobrenome' => $this->sobrenome,
+            'endereco'  => $this->idEndereco
+        );
     }
 
     /**
@@ -76,9 +101,31 @@ class Pessoas extends Model
 
         $prepStm->bindValue(':nome', "$this->nome");
         $prepStm->bindValue(':sobrenome', "$this->sobrenome");
-        $prepStm->bindValue(':fk_enderecos', ((!is_null($this->endereco)) ? $this->endereco : NULL));
+        $prepStm->bindValue(':fk_enderecos', ((!is_null($this->idEndereco)) ? $this->idEndereco : NULL));
 
         return $prepStm->execute();
 
+    }
+
+    public function update()
+    {
+        $sqlStm = "UPDATE pessoas SET  nome = :nome, sobrenome = :sobrenome, fk_enderecos = :fk_enderecos WHERE id = :id";
+        $prepStm = $this->connection->prepare($sqlStm);
+
+        $prepStm->bindValue(':id', "$this->id");
+        $prepStm->bindValue(':nome', "$this->nome");
+        $prepStm->bindValue(':sobrenome', "$this->sobrenome");
+        $prepStm->bindValue(':fk_enderecos', ((!is_null($this->idEndereco)) ? $this->idEndereco : NULL));
+
+        return $prepStm->execute();
+
+    }
+
+    public function delete()
+    {
+        $sqlStm = "DELETE FROM pessoas WHERE id = :id";
+        $prepStm = $this->connection->prepare($sqlStm);
+        $prepStm->bindValue(':id', "$this->id");
+        return $prepStm->execute();
     }
 }

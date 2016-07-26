@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: luan
- * Date: 14/07/16
- * Time: 02:04
- */
+
 
 $config = [];
 
@@ -21,4 +16,4 @@ $config['default_controller'] = 'home';
 $config['default_error'] = 'notfound';
 $config['default_action'] = 'index';
 
-$config['title'] = 'Facim';
+$config['title'] = 'Cadastro de pessoas fácil';

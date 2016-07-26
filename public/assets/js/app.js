@@ -4,6 +4,14 @@
 
 var table = document.getElementById('table-pessoas');
 formPessoa = document.forms['form-pessoa'];
+var tituloFormulario = {
+    editar: 'Editar Pessoa',
+    nova:   'Novo cadastro de pessoa'
+};
+var messages = {
+    delete : 'Tem certeza que deseja deletar?'
+};
+formTitle = document.getElementById('form-title');
 
 populateTable = function (response) {
     content = JSON.parse(response);
@@ -29,23 +37,23 @@ populateTable = function (response) {
             if (pessoa.rua) {
                 td += pessoa.rua;
                 tableRow.setAttribute('data-rua',pessoa.rua);
-            }
+            } else td += '_ ';
             if (pessoa.numero) {
                 td += ', ' + pessoa.numero;
                 tableRow.setAttribute('data-numero',pessoa.numero);
-            }
+            } else td += ', _ ';
             if (pessoa.bairro) {
                 td += ', ' + pessoa.bairro;
                 tableRow.setAttribute('data-bairro',pessoa.bairro);
-            }
+            } else td += ', _ ';
             if (pessoa.cidade) {
                 td += ', ' + pessoa.cidade;
                 tableRow.setAttribute('data-cidade',pessoa.cidade);
-            }
+            } else td += ', _ ';
             if (pessoa.uf) {
                 td += ' - ' + pessoa.uf;
                 tableRow.setAttribute('data-uf',pessoa.uf);
-            }
+            } else td += '- _ ';
             td += '</td>';
 
             tableRow.innerHTML = td;
@@ -63,6 +71,12 @@ clearTable = function () {
     table.appendChild(head);
 };
 
+clearForm = function () {
+    formTitle.innerHTML = tituloFormulario.nova;
+    formPessoa.setAttribute('data-action', 'create');
+    formPessoa.reset();
+};
+
 formErro = function (campo, msg) {
     var msg = msg || null;
     eCampo = document.querySelector("input[name=" + campo + "]");
@@ -75,12 +89,17 @@ formErro = function (campo, msg) {
 
 activeButtons = function () {
     var aEditors = document.getElementsByClassName('fa-pencil');
+    var aEraser = document.getElementsByClassName('fa-eraser');
     for (i = 0; i < aEditors.length; i++) {
         aEditors[i].onclick = editPessoa;
+        aEraser[i].onclick = deletePessoa;
+
     }
 };
 
 editPessoa = function () {
+    formTitle .innerHTML= tituloFormulario.editar;
+    formPessoa.setAttribute('data-action', 'update');
     idPessoa           = this.parentNode.parentNode.getAttribute('data-id');
     nomePessoa         = this.parentNode.parentNode.getAttribute('data-nome');
     sobrenomePessoa    = this.parentNode.parentNode.getAttribute('data-sobrenome');
@@ -100,13 +119,25 @@ editPessoa = function () {
     formPessoa['uf'].value          = ufPessoa;
 };
 
+deletePessoa = function () {
+    if(confirm(messages.delete)){
+        idPessoa = this.parentNode.parentNode.getAttribute('data-id');
+        ajax('POST', 'pessoa/delete',
+            function (response) {
+                clearTable();
+                //clearForm();
+                ajax("POST", "pessoa", populateTable);
+            },
+            'id=' + idPessoa
+        );
+    }
+};
 
-
-ajax("POST", "pessoa", populateTable);
-
-document.getElementById('form-pessoa').onsubmit = function () {
+submitFormPessoa = function () {
 
     erro = false;
+    action = formPessoa.getAttribute('data-action');
+    id = formPessoa['id'].value;
     nome = formPessoa['nome'].value;
     sobrenome = formPessoa['sobrenome'].value;
     rua = formPessoa['rua'].value;
@@ -129,12 +160,13 @@ document.getElementById('form-pessoa').onsubmit = function () {
     }
 
     if(!erro) {
-        ajax('POST', 'pessoa/create',
+        ajax('POST', 'pessoa/'+ action,
             function (response) {
                 clearTable();
+                clearForm();
                 ajax("POST", "pessoa", populateTable);
-                formPessoa.reset();
             },
+            'id=' + id + '&' +
             'nome=' + nome + '&' +
             'sobrenome=' + sobrenome + '&' +
             'rua=' + rua + '&' +
@@ -147,6 +179,10 @@ document.getElementById('form-pessoa').onsubmit = function () {
 
     return false;
 };
-496
-507
-206
+
+ajax("POST", "pessoa", populateTable);
+
+
+document.getElementById('submit-form-pessoa').onclick = function () {
+    submitFormPessoa();
+};

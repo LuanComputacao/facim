@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: luan
- * Date: 13/07/16
- * Time: 10:34
- */
+
 
 
 $request_url = (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : '';
