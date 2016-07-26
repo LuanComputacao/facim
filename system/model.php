@@ -9,7 +9,7 @@
 class Model
 {
 
-    protected $connection;
+    public $connection;
 
     /**
      * Model constructor.
@@ -18,6 +18,7 @@ class Model
     {
         global $config;
         $this->connection = new PDO($config['db_dsn'], $config['db_user'], $config['db_pass']) or die('MySQL connection problem');
+        $this->connection->query("use ". $config['db_name']);
     }
 
     public function create()

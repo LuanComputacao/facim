@@ -70,12 +70,13 @@ class Pessoas extends Model
 
     public function save()
     {
-        $sqlStm = "INSERT INTO crossknowledge.pessoas (nome, sobrenome)
-                    VALUES (:nome, :sobrenome)";
+        $sqlStm = "INSERT INTO pessoas (nome, sobrenome, fk_enderecos)
+                    VALUES (:nome, :sobrenome, :fk_enderecos)";
         $prepStm = $this->connection->prepare($sqlStm);
 
         $prepStm->bindValue(':nome', "$this->nome");
         $prepStm->bindValue(':sobrenome', "$this->sobrenome");
+        $prepStm->bindValue(':fk_enderecos', ((!is_null($this->endereco)) ? $this->endereco : NULL));
 
         return $prepStm->execute();
 
