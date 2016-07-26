@@ -1,5 +1,6 @@
 <h1 class="t-center ">Cadastrar pessoa</h1>
 <form id="form-pessoa" onsubmit="return validateForm()">
+    <input type="hidden" name="id" value="">
     <fieldset>
         <legend>Cadastro de pessoas</legend>
         <input placeholder="Nome"       name="nome"          maxlength="24" size="24" type="text"><br/>
