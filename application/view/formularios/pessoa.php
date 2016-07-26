@@ -1,5 +1,5 @@
-<h1 class="t-center ">Cadastrar pessoa</h1>
-<form id="form-pessoa" onsubmit="return validateForm()">
+<h1 id="form-title" class="t-center">Cadastrar pessoa</h1>
+<form id="form-pessoa" data-action="create">
     <input type="hidden" name="id" value="">
     <fieldset>
         <legend>Cadastro de pessoas</legend>
@@ -14,7 +14,10 @@
         <input placeholder="Cidade" name="cidade"  maxlength="45"   size="45"   type="text">
         <input placeholder="UF"     name="uf"      maxlength="2"    size="2"    type="text"><br/>
     </fieldset>
-    <div class="col-1-100 t-center">
+    <div class="col-1-100 t-center" hidden>
         <input type="submit" value="Enviar">
+    </div>
+    <div class="col-1-100 t-center">
+        <div class="sbm-button" id="submit-form-pessoa"><i class="fa fa-send" aria-hidden="true"></i>Enviar</div>
     </div>
 </form>

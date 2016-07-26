@@ -1,6 +1,6 @@
 <?php include('head.php'); ?>
     <div class="row">
-        <div class="col-1-100">
+        <div class="col-1-100 head">
             <h1 class="t-center"><?php echo $title ?></h1>
         </div>
     </div>

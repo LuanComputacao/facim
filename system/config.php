@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: luan
- * Date: 14/07/16
- * Time: 13:39
- */
+
 
 
 define('ROOT_DIR', realpath((dirname(__DIR__))));
