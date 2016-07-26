@@ -13,3 +13,9 @@
 /*table*/
 
 .table-bordered td{ border: 1px solid #c0c0c0;}
+
+
+/*icons*/
+.fa-eraser, .fa-pencil {
+    cursor: pointer;
+}

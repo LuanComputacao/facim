@@ -55,7 +55,7 @@ class Pessoas extends Model
      */
     public function getPessoas($nome = null, $sobrenome = null)
     {
-        $sqlStm = 'SELECT  p.nome, p.sobrenome, e.rua, e.numero, e.bairro, e.cidade, e.uf FROM pessoas p LEFT JOIN enderecos e ON p.fk_enderecos = e.id ';
+        $sqlStm = 'SELECT  p.id, p.nome, p.sobrenome, e.rua, e.numero, e.bairro, e.cidade, e.uf FROM pessoas p LEFT JOIN enderecos e ON p.fk_enderecos = e.id ';
         $sqlStm .= (!is_null($nome)) ? ' AND nome LIKE :nome' : '';
         $sqlStm .= (!is_null($sobrenome)) ? ' AND sobrenome LIKE :sobrenome' : '';
         $prepSt = $this->connection->prepare($sqlStm);

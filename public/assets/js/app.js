@@ -7,11 +7,13 @@ formPessoa = document.forms['form-pessoa'];
 
 populateTable = function (response) {
     content = JSON.parse(response);
-    console.log(content);
     if (content.length > 0) {
         content.forEach(function (pessoa, index) {
             var tableRow = document.createElement('tr');
-            var td = '';
+            var td = '<td>' +
+                '<i class=" fa fa-pencil" aria-hidden="true" data-id="'+ pessoa.id +'"></i>' +
+                '<i class="fa fa-eraser" aria-hidden="true" data-id="'+ pessoa.id +'"></i>' +
+                '</td>';
             if (pessoa.nome)        td += '<td>' + pessoa.nome + '</td>';
             if (pessoa.sobrenome)   td += '<td>' + pessoa.sobrenome + '</td>';
             td += '<td>';
@@ -89,5 +91,4 @@ function formErro (campo, msg) {
         title.value = msg;
         eCampo.setAttributeNode(title) ;
     }
-    console.log(eCampo);
 };

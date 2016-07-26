@@ -7,22 +7,25 @@
 
     <div class="row">
         <div class="col-1-100">
-            <?php include('formularios/pessoa.php');?>
+            <?php include('formularios/pessoa.php'); ?>
         </div>
     </div>
 
-    <div class="container-table-pessoas" >
+    <div class="container-table-pessoas">
         <div class="row">
             <div class="col-1-100 t-center">
                 <h1>Pessoas</h1>
             </div>
         </div>
         <div class="row">
-            <table  id="table-pessoas" class=" col-1-100 t-center">
+            <table id="table-pessoas" class=" col-1-100 t-center">
                 <thead>
-                <td>Nome</td>
-                <td>Sobrenome</td>
-                <td>Endereço</td>
+                <tr>
+                    <th></th>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Endereço</th>
+                </tr>
                 </thead>
             </table>
         </div>
