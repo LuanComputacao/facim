@@ -61,14 +61,25 @@ populateTable = function (response) {
         });
         activeButtons();
     } else {
-        table.innerHTML = '<td colspan="3"> Não há pessoas cadastradas</td>'
+        clearTable(true);
     }
 };
 
-clearTable = function () {
+clearTable = function (noData) {
+    var noData = noData || false;
+    tableRow = document.createElement('tr');
+
     head = table.getElementsByTagName('thead')[0].cloneNode(true);
+
     table.innerHTML = '';
+
+    // Reconstrói a tabela com cabeçalho
     table.appendChild(head);
+    if(noData){
+        tableRow.innerHTML  = '<td colspan="4"> Não há pessoas cadastradas</td>';
+    }
+
+    table.appendChild(tableRow  );
 };
 
 clearForm = function () {
@@ -135,16 +146,16 @@ deletePessoa = function () {
 
 submitFormPessoa = function () {
 
-    erro = false;
-    action = formPessoa.getAttribute('data-action');
-    id = formPessoa['id'].value;
-    nome = formPessoa['nome'].value;
+    erro      = false;
+    action    = formPessoa.getAttribute('data-action');
+    id        = formPessoa['id'].value;
+    nome      = formPessoa['nome'].value;
     sobrenome = formPessoa['sobrenome'].value;
-    rua = formPessoa['rua'].value;
-    numero = formPessoa['numero'].value;
-    bairro = formPessoa['bairro'].value;
-    cidade = formPessoa['cidade'].value;
-    uf = formPessoa['uf'].value;
+    rua       = formPessoa['rua'].value;
+    numero    = formPessoa['numero'].value;
+    bairro    = formPessoa['bairro'].value;
+    cidade    = formPessoa['cidade'].value;
+    uf        = formPessoa['uf'].value;
 
     if (nome == null || nome == '') {
         formErro('nome');

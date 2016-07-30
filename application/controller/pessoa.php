@@ -35,8 +35,6 @@ class Pessoa extends Controller
 
         $enderecos->save();
 
-        echo json_encode($enderecos->getEndereco());
-
         $pessoas = $this->loadModel('Pessoas');
 
 //        Nome
