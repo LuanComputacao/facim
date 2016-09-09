@@ -1,15 +1,29 @@
 <?php
+/**
+ * Funções para administração da tabela Pessoas
+ */
 
+namespace Facim\application\model;
+use PDO;
 
+/**
+ * Classe Model Pessoas
+ *
+ * Classe para administrar o modelo __pessoas__. Representa _exatamente a tabela_ do banco de dados.
+ *
+ * @package Facim\application\model
+ */
 class Pessoas extends Model
 {
-    private $id = null;
-    private $nome = null;
-    private $sobrenome = null;
-    private $idEndereco = null;
+	/** @var null|integer 	$id 			ID do registro da pessoa */
+	/** @var string 		$nome 			Nome da pessoa*/
+	/** @var string  		$sobrenome 		Sobrenome*/
+	/** @var integer 		$idEndereco 	Chave estrangeira da tabela de endereços*/
+	private $id, $nome, $sobrenome, $idEndereco = null;
 
 
     /**
+	 * Atribui um ID
      * @param null $id
      */
     public function setId($id)
@@ -18,6 +32,7 @@ class Pessoas extends Model
     }
 
     /**
+	 * Atribui nome
      * @param null $nome
      */
     public function setNome($nome)
@@ -26,6 +41,7 @@ class Pessoas extends Model
     }
 
     /**
+	 * Atribui sobrenome
      * @param null $sobrenome
      */
     public function setSobrenome($sobrenome)
@@ -34,6 +50,7 @@ class Pessoas extends Model
     }
 
     /**
+	 * Atribui uma chave de endereço
      * @param null $idEndereco
      */
     public function setIdEndereco($idEndereco)
@@ -42,7 +59,12 @@ class Pessoas extends Model
     }
 
     /**
-     * @return null
+	 * Retorna o ID do endereço.
+	 *
+	 * Caso o ID esteja vazio, busca o ID do endereço desta pessoa no banco de dados e atribui
+	 * para então retornar.
+	 *
+     * @return null|string ID do Endereço
      */
     public function getIdEndereco()
     {
@@ -61,6 +83,11 @@ class Pessoas extends Model
 
     }
 
+	/**
+	 * Retorna todos os dados da pessoa
+	 *
+	 * @return array[id, nome, sobrenome, endereco]
+	 */
     public function getPessoa()
     {
         return array(
@@ -72,9 +99,9 @@ class Pessoas extends Model
     }
 
     /**
-     * Obtem pessoas com endereço
+     * Obtem pessoas com seus respectivos endereços
      *
-     * @param $nome
+     * @param string $nome
      * @param null $sobrenome
      * @return array
      */
@@ -93,7 +120,12 @@ class Pessoas extends Model
         return $prepSt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function save()
+	/**
+	 * Salva a instancia do objeto no banco de dados
+	 *
+	 * @return bool
+	 */
+	public function save()
     {
         $sqlStm = "INSERT INTO pessoas (nome, sobrenome, fk_enderecos)
                     VALUES (:nome, :sobrenome, :fk_enderecos)";
@@ -107,6 +139,11 @@ class Pessoas extends Model
 
     }
 
+	/**
+	 * Atualiza as informações de uma pessoa, conforme os atributos desta classe
+	 *
+	 * @return bool
+	 */
     public function update()
     {
         $sqlStm = "UPDATE pessoas SET  nome = :nome, sobrenome = :sobrenome, fk_enderecos = :fk_enderecos WHERE id = :id";
@@ -121,6 +158,11 @@ class Pessoas extends Model
 
     }
 
+	/**
+	 * Exclui um registro de pessoa do banco, conforme os atributos desta classe
+	 *
+	 * @return bool
+	 */
     public function delete()
     {
         $sqlStm = "DELETE FROM pessoas WHERE id = :id";

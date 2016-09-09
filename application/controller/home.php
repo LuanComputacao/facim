@@ -1,6 +1,12 @@
 <?php
 
+namespace Facim\application\controller;
+use Facim\application\model\Pessoas;
 
+/**
+ * Class Home
+ * @package Facim\application\controller
+ */
 class Home extends Controller
 {
 

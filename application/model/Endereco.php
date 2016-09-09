@@ -1,6 +1,8 @@
 <?php
 
 
+namespace Facim\application\model;
+
 class Endereco extends Model
 {
     private $id = null;

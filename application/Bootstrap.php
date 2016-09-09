@@ -1,5 +1,15 @@
 <?php
+namespace Facim\system;
+use Facim\application\controller;
 
+/**
+ * Realiza a validação das rotas
+ *
+ * Verifica se a rota de controle e a ação de controle são existentes na aplicação.
+ * Caso a o controle e/ou ação não sejam encontrados, retorna a pagina de erro padrão da aplicação
+ *
+ * *Página de erro configurada em _application/config/config.php_
+ */
 
 
 $request_url = (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : '';
@@ -24,8 +34,9 @@ if (file_exists($controllerFile)) {
 } else {
     $controller = $config['default_error'];
     $action = $config['default_action'];
-    require_once(APP_DIR . '/controller/' . $config['default_error'] . '.php');
+    require_once('/controller/' . $config['default_error'] . '.php');
 }
 
+$controller = 'Facim\application\controller\\' . $controller;
 $oController = new $controller;
 call_user_func_array(array($oController, $action), array(array_slice($segments, 2)));
