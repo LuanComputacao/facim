@@ -13,7 +13,7 @@ $config['db_pass']  = 'secret';
 
 // MVC
 $config['default_controller'] = 'home';
-$config['default_error'] = 'notfound';
-$config['default_action'] = 'index';
+$config['default_error']      = 'notfound';
+$config['default_action']     = 'index';
 
 $config['title'] = 'Cadastro de pessoas fácil';

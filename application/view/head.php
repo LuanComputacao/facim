@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title> <?php echo (isset($title))?$title:''; ?> </title>
+    <title> <?php echo (isset($title)) ? $title : ''; ?> </title>
     <link rel="stylesheet" href="/assets/css/normalize.css ">
     <link rel="stylesheet" href="/assets/vendors/css/font-awesome.min.css ">
     <link rel="stylesheet" href="/assets/vendors/jquery-ui-1.12.0/jquery-ui.min.css ">
