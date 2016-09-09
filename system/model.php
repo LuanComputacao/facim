@@ -1,6 +1,11 @@
 <?php
+namespace Facim\application\model;
+use PDO;
 
-
+/**
+ * Class Model
+ * @package Facim\application\model
+ */
 class Model
 {
 

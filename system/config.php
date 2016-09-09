@@ -1,5 +1,5 @@
 <?php
-
+namespace Facim\system;
 
 
 define('ROOT_DIR', realpath((dirname(__DIR__))));

@@ -1,5 +1,9 @@
 <?php
-
+namespace Facim\application\controller;
+/**
+ * Class NotFound
+ * @package Facim\application\controller
+ */
 class NotFound extends Controller
 {
     public function index()
