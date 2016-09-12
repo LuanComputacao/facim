@@ -18,4 +18,8 @@ $config['default_controller'] = 'home';
 $config['default_error']      = 'notfound';
 $config['default_action']     = 'index';
 
+
+// Application properties
+$config['url'] = 'crossknowledge.app';
+$config['url_dev'] = 'crossknowledge.com.br';
 $config['title'] = 'Cadastro de pessoas fácil';
