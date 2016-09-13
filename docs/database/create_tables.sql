@@ -1,4 +1,4 @@
-CREATE TABLE enderecos
+CREATE TABLE crossknowledge.enderecos
 (
   id INT(11) PRIMARY KEY NOT NULL,
   rua VARCHAR(90),
@@ -7,7 +7,7 @@ CREATE TABLE enderecos
   cidade VARCHAR(90),
   uf VARCHAR(45)
 );
-CREATE TABLE pessoas
+CREATE TABLE crossknowledge.pessoas
 (
   id INT(11) PRIMARY KEY NOT NULL,
   nome VARCHAR(45),
